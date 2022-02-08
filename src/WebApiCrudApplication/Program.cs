@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebApiCrudApplication.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +19,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+builder.Services.AddDbContext<MyWorldDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PCConnectionString"));
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
