@@ -65,6 +65,13 @@ namespace WebApiCrudApplication.Controllers
             await _myWorldDbContext.SaveChangesAsync();
             return NoContent();
         }
-
+        [HttpGet]
+        [Route("{cakeType}")]
+        public async Task<IActionResult> GetCakeByTypeAsync(string cakeType)
+        {
+            var cake = _myWorldDbContext.Cake.Where(x => x.Type == cakeType);
+            return Ok(cake);
+        }
+        
     }
 }
